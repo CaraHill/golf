@@ -1,17 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+
+const StartGame = () => {
+  const [showGameInfo, setGameInfo] = React.useState(false)
+  const onClick = () => setGameInfo(true)
+  return (
+    <div>
+      <input type="submit" value="Start Game" onClick={onClick} />
+      { showGameInfo ? <GameInfo /> : null }
+    </div>
+  )
+}
+
+const GameInfo = () => (
+  <div id="info" className="game-info">
+    <label>How many players?</label>
+    <input type="number" value="0" />
+  </div>
+)
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <StartGame />
   </React.StrictMode>,
   document.getElementById('root')
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
