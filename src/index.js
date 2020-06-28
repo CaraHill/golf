@@ -19,40 +19,65 @@ class GameInfo extends React.Component {
       <div id="info" className="game-info">
         <label>How many players?</label>
         <input type="number" value={0} />
-        <PlayerTable />
+        <PlayerTable number={5}/>
       </div>
     )
   }
 }
 
-const PlayerTable  = () => {
-  const holesTable = [];
+class PlayerTable extends React.Component {
+  holesTable() {
+    const numberHoles = [];
 
-  for(let i=1; i < 10; i++) {
-    holesTable.push(
-      <tr>
-        <td>{i}</td>
+    for(let i=1; i < 10; i++) {
+      numberHoles.push(
+        <tr>
+          <td>{i}</td>
+          {this.playersInputs()}
+        </tr>
+      )
+    }
+
+    return numberHoles;
+  }
+
+  playersHeaders() {
+    const numberPlayers = [];
+
+    for(let i=1; i <= this.props.number; i++) {
+      numberPlayers.push(
+        <th>Player {i}</th>
+      )
+    }
+
+    return numberPlayers;
+  }
+
+  playersInputs() {
+    const numberInputs = [];
+
+    for(let i=1; i <= this.props.number; i++) {
+      numberInputs.push(
         <td>0</td>
-        <td>0</td>
-      </tr>
+      )
+    }
+
+    return numberInputs;
+  }
+
+  render() {
+    return (
+      <table>
+        <tr>
+          <th>
+            Holes
+          </th>
+          {this.playersHeaders()}
+        </tr>
+        {this.holesTable()}
+      </table>
     )
   }
-  return (
-    <table>
-      <tr>
-        <th>
-          Holes
-        </th>
-        <th>
-          Player 1
-        </th>
-        <th>
-          Player 2
-        </th>
-      </tr>
-      {holesTable}
-    </table>
-  )
 }
 
 class Game extends React.Component {
