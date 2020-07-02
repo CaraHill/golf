@@ -14,12 +14,33 @@ const StartGame = () => {
 }
 
 class GameInfo extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      numPlayers: null,
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange({ target }) {
+    this.setState({
+      [target.name]: target.value
+    });
+  }
+
   render() {
     return (
       <div id="info" className="game-info">
         <label>How many players?</label>
-        <input type="number" value={0} />
-        <PlayerTable number={5}/>
+        <input
+          type="number"
+          name="numPlayers"
+          placeholder="0"
+          value={this.state.numPlayers}
+          onChange={ this.handleChange }
+        />
+        <PlayerTable number={this.state.numPlayers}/>
       </div>
     )
   }
